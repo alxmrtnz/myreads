@@ -8,17 +8,24 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-
+    books: []
   }
-
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    })
+  }
   render() {
+    console.log('books: ', this.state.books);
     return (
       <div className="app">
         <Route path="/search" render= { () => (
           <SearchBooks />
         )} />
         <Route exact path="/" render= {() => (
-          <ListBooks />
+          <ListBooks
+            books={ this.state.books }
+          />
         )}/>
       </div>
     )
