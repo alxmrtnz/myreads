@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import escapeRegExp from 'escape-string-regexp'
 
 import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 class SearchBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    handleBookShelfChange: PropTypes.func.isRequired
   }
   state = {
     searchBooks: [],
@@ -32,9 +35,11 @@ class SearchBooks extends Component {
 
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i');
-      showingBooks = books.filter((book) => match.test(book.name));
+      showingBooks = books.filter((book) => match.test(book.title));
+      console.log(showingBooks)
     } else {
       showingBooks = books;
+      console.log('default: ', showingBooks)
     }
 
     return (
@@ -56,7 +61,13 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {showingBooks.map((book) => (
+              <li key={book.id}>
+                <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange}/>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     )
