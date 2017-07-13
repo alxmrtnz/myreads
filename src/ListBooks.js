@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import Book from './Book'
+
 class ListBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    handleBookShelfChange: PropTypes.func.isRequired
   }
   render() {
     const { books } = this.props
@@ -12,8 +15,6 @@ class ListBooks extends Component {
     let currentlyReadingBooks = books.filter((book) => book.shelf === 'currentlyReading')
     let wantToReadBooks = books.filter((book) => book.shelf === 'wantToRead')
     let readBooks = books.filter((book) => book.shelf === 'read')
-
-    console.log('currently reading books: ', currentlyReadingBooks)
 
     return (
       <div className="list-books">
@@ -28,29 +29,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {currentlyReadingBooks.map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
-                          </div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">
-                          {book.title}
-                        </div>
-                        <div className="book-authors">
-                          {book.authors}
-                        </div>
-                      </div>
+                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange}/>
                     </li>
                   ))}
                 </ol>
@@ -62,29 +41,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {wantToReadBooks.map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
-                          </div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">
-                          {book.title}
-                        </div>
-                        <div className="book-authors">
-                          {book.authors}
-                        </div>
-                      </div>
+                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange} />
                     </li>
                   ))}
                 </ol>
@@ -96,29 +53,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {readBooks.map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
-                          </div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">
-                          {book.title}
-                        </div>
-                        <div className="book-authors">
-                          {book.authors}
-                        </div>
-                      </div>
+                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange} />
                     </li>
                   ))}
                 </ol>
