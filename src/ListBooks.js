@@ -34,7 +34,10 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {currentlyReadingBooks.map((book) => (
                     <li key={book.id}>
-                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange}/>
+                      <Book
+                        book={book}
+                        handleBookShelfChange={this.props.handleBookShelfChange}
+                      />
                     </li>
                   ))}
                 </ol>
@@ -46,7 +49,10 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {wantToReadBooks.map((book) => (
                     <li key={book.id}>
-                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange} />
+                      <Book
+                        book={book}
+                        handleBookShelfChange={this.props.handleBookShelfChange}
+                      />
                     </li>
                   ))}
                 </ol>
@@ -58,7 +64,10 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {readBooks.map((book) => (
                     <li key={book.id}>
-                      <Book book={book} handleBookShelfChange={this.props.handleBookShelfChange} />
+                      <Book
+                        book={book}
+                        handleBookShelfChange={this.props.handleBookShelfChange}
+                      />
                     </li>
                   ))}
                 </ol>

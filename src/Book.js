@@ -10,6 +10,7 @@ class Book extends Component {
 
   render() {
     const { book, handleBookShelfChange } = this.props
+
     let thumbnail = book.imageLinks ? book.imageLinks.thumbnail : 'https://books.google.com/googlebooks/images/no_cover_thumb.gif';
 
     return (

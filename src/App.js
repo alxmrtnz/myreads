@@ -19,9 +19,9 @@ class BooksApp extends React.Component {
   }
 
   /**
-  * @description Represents a book
+  * @description Function to change the shelf status of a book
   * @param {Object} book - The book object being moved between shelves
-  * @param {string} author - The author of the book
+  * @param {string} shelf - The shelf where the book is moving to
   */
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then((books) => {

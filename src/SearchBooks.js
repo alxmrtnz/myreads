@@ -16,10 +16,16 @@ class SearchBooks extends Component {
     query: ''
   }
 
+  /**
+  * @description Function to update value of search input and
+  * update state.booksFound after calling BooksAPI.search()
+  * @param {string} query - The latest search query
+  */
   updateQuery = (query) => {
     this.setState({
       query: query,
     });
+
     if (query) {
       BooksAPI
       .search(query, 20)
@@ -38,12 +44,28 @@ class SearchBooks extends Component {
     }
   }
 
+  /**
+  * @description Function to empty the `booksFound` array when there
+  * is an empty query or no books returned from a search
+  * @param {string} query - The latest search query
+  */
   resetBooksFound() {
     this.setState({
       booksFound: []
     })
   }
 
+  /**
+  * @description Function to handle a shelf change of a book.
+  * This function calls the prop function `handleBookShelfChange`. It also
+  * updates the select dropdown status of the book being changed on the search
+  * page by creating a new `curentBook` object with an updated `shelf`
+  * property. Then, the new book object is inserted in place of the
+  * `changedBook` and the state is updated/the page is re-rendered
+  *
+  * @param {Object} changedBook - the book object being moved between shelves
+  * @param {string} shelf - The shelf where the book is moving to
+  */
   handleBookShelfChange = (changedBook, shelf) => {
     this.props.handleBookShelfChange(changedBook, shelf)
 
@@ -65,6 +87,15 @@ class SearchBooks extends Component {
     })
   }
 
+  /**
+  * @description Function to make sure books that are shown on the
+  * search page have the correct shelf status.
+  * This function looks at all books passed down from App.js (the books
+  * currently on shelves) and maps booksFound to a new array with
+  * updated shelf statuses (if the book is found in this.props.books)
+  *
+  * @param {array} booksFound - The books returned via a search query
+  */
   reconcileBooks(booksFound) {
     let bookIds = {}
     this.props.books.forEach((book) => {
@@ -105,7 +136,10 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {showingBooks.map((book) => (
               <li key={book.id}>
-                <Book book={book} handleBookShelfChange={this.handleBookShelfChange} />
+                <Book
+                  book={book}
+                  handleBookShelfChange={this.handleBookShelfChange}
+                />
               </li>
             ))}
           </ol>
