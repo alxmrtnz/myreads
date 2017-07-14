@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import sortBy from 'sort-by'
 
 import Book from './Book'
 
@@ -15,6 +16,10 @@ class ListBooks extends Component {
     let currentlyReadingBooks = books.filter((book) => book.shelf === 'currentlyReading')
     let wantToReadBooks = books.filter((book) => book.shelf === 'wantToRead')
     let readBooks = books.filter((book) => book.shelf === 'read')
+
+    currentlyReadingBooks.sort(sortBy('title'));
+    wantToReadBooks.sort(sortBy('title'));
+    readBooks.sort(sortBy('title'));
 
     return (
       <div className="list-books">
@@ -65,7 +70,8 @@ class ListBooks extends Component {
           <Link
             to="/search"
           >
-            Add a book</Link>
+            Add a book
+          </Link>
         </div>
       </div>
     )

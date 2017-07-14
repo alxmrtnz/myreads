@@ -11,22 +11,27 @@ class BooksApp extends React.Component {
   state = {
     books: []
   }
+
   componentDidMount() {
-    // Get all books on shelves
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
+
+  /**
+  * @description Represents a book
+  * @param {Object} book - The book object being moved between shelves
+  * @param {string} author - The author of the book
+  */
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then((books) => {
-
       BooksAPI.getAll().then((books) => {
         this.setState({ books })
       })
     })
   }
-  render() {
 
+  render() {
     return (
       <div className="app">
         <Route path="/search" render={() => (
