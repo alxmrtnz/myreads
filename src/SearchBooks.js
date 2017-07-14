@@ -30,7 +30,6 @@ class SearchBooks extends Component {
       BooksAPI
       .search(query, 20)
       .then((booksFound) => {
-
         if (booksFound.length > 0) {
           this.setState({
             booksFound: this.reconcileBooks(booksFound)
